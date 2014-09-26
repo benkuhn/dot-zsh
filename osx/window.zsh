@@ -6,5 +6,10 @@ not_focused () {
 }
 
 send_notification () {
-    osascript -e "display notification \"$2\" with title \"$1\""
+    if exists terminal-notifier; then
+        APPID=com.googlecode.iTerm2
+        terminal-notifier -message "$2" -title "$1" -activate $APPID -sender $APPID
+    else
+        osascript -e "display notification \"$2\" with title \"$1\""
+    fi
 }

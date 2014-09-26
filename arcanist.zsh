@@ -1,6 +1,9 @@
 #!/bin/zsh
 
-# add Arcanist path to bin
-export PATH=$PATH:$HOME/apps/phab/arcanist/bin
-# add Arcanist shell completion
-source apps/phab/arcanist/resources/shell/bash-completion
+ARCANIST=$HOME/apps/phab/arcanist
+if [[ -x $ARCANIST ]]; then
+    # add Arcanist path to bin
+    export PATH=$PATH:$ARCANIST/bin
+    # add Arcanist shell completion
+    source $ARCANIST/resources/shell/bash-completion
+fi
