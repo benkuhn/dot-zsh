@@ -15,6 +15,7 @@ preexec () {
 precmd () {
     if not_focused && [[ $((`date +%s` - BK_LAST_TIME)) > 1 && $BK_LAST_COMMAND != "" ]]; then
         send_notification "Command finished" "$BK_LAST_COMMAND"
+        say "command finished"
         BK_LAST_COMMAND=""
     fi
 }

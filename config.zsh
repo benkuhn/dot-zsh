@@ -19,8 +19,16 @@ setopt autopushd
 unsetopt beep
 bindkey -e
 
-PROMPT=" %{$terminfo[bold]%}%{$fg[cyan]%}%.%(?..%{$fg[red]%} %?)%{$terminfo[sgr0]%} %# "
+bk_reset_prompt () {
+    PROMPT=" %{$terminfo[bold]%}%{$fg[cyan]%}%.%(?..%{$fg[red]%} %?)%{$terminfo[sgr0]%} %# "
+    BK_DID_SET_PROMPT=1
+}
+if [[ $BK_DID_SET_PROMPT != '1' ]]; then
+    bk_reset_prompt
+fi
+
 export EDITOR="emacsclient"
 WORDCHARS=${WORDCHARS//[\/\.]}
 
+# TODO(ben): make this idempotent so I can reload .zshrc properly
 export PATH=$PATH:~/bin

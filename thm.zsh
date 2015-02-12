@@ -10,3 +10,7 @@ thm () {
     export PYTHONPATH
     cd $al
 }
+
+cr () {
+    arc diff -m CAPCR
+}
