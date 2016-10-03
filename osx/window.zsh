@@ -1,8 +1,15 @@
 #!/bin/zsh
 
 not_focused () {
-    # this seems hard to do on Mac, so we optimize for the common case :P
-    return 0
+    _FRONT=$(osascript -e 'tell application "System Events" to return name of first application process whose frontmost is true')
+    if [[ $_FRONT != "iTerm" ]]; then
+        return 0
+    fi
+    _FRONT_TTY=$(osascript -e 'tell application "iTerm" to return tty of current session of current terminal')
+    if [[ $_FRONT_TTY = $TTY ]]; then
+        return 1
+    fi
+    return 1
 }
 
 send_notification () {
