@@ -16,11 +16,12 @@ setopt autocd
 setopt nomatch
 setopt notify
 setopt autopushd
+setopt prompt_subst
 unsetopt beep
 bindkey -e
 
 bk_reset_prompt () {
-    PROMPT=" %{$terminfo[bold]%}%{$fg[cyan]%}%.%(?..%{$fg[red]%} %?)%{$terminfo[sgr0]%} %# "
+    PROMPT='$(parse_git_branch) %{$terminfo[bold]%}%{$fg[cyan]%}%.%(?..%{$fg[red]%} %?)%{$terminfo[sgr0]%} %# '
     BK_DID_SET_PROMPT=1
 }
 if [[ $BK_DID_SET_PROMPT != '1' ]]; then
