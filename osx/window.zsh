@@ -2,14 +2,21 @@
 
 not_focused () {
     _FRONT=$(osascript -e 'tell application "System Events" to return name of first application process whose frontmost is true')
-    if [[ $_FRONT != "iTerm" ]]; then
+    if [[ $_FRONT != "iTerm2" ]]; then
         return 0
     fi
-    _FRONT_TTY=$(osascript -e 'tell application "iTerm" to return tty of current session of current terminal')
+    _FRONT_TTY=$(osascript - <<EOF
+tell application "iTerm2"
+     tell current session of current tab of current window
+          return tty
+     end tell
+end tell
+EOF
+              )
     if [[ $_FRONT_TTY = $TTY ]]; then
         return 1
     fi
-    return 1
+    return 0
 }
 
 send_notification () {
