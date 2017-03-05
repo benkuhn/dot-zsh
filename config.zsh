@@ -28,7 +28,7 @@ if [[ $BK_DID_SET_PROMPT != '1' ]]; then
     bk_reset_prompt
 fi
 
-export EDITOR="emacsclient"
+export EDITOR="emacs -Q"
 WORDCHARS=${WORDCHARS//[\/\.]}
 
 # TODO(ben): make this idempotent so I can reload .zshrc properly
